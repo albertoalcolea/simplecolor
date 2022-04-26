@@ -25,26 +25,26 @@ This is especially useful when developing command line applications whose output
 | Color   | Foreground    | Background      |
 |---------|---------------|-----------------|
 | Black   | Color.BLACK   | BgColor.BLACK   |
-| RED     | Color.RED     | BgColor.RED     |
-| GREEN   | Color.GREEN   | BgColor.GREEN   |
-| YELLOW  | Color.YELLOW  | BgColor.YELLOW  |
-| BLUE    | Color.BLUE    | BgColor.BLUE    |
-| MAGENTA | Color.MAGENTA | BgColor.MAGENTA |
-| CYAN    | Color.CYAN    | BgColor.CYAN    |
-| WHITE   | Color.WHITE   | BgColor.WHITE   |
+| Red     | Color.RED     | BgColor.RED     |
+| Green   | Color.GREEN   | BgColor.GREEN   |
+| Yellow  | Color.YELLOW  | BgColor.YELLOW  |
+| Blue    | Color.BLUE    | BgColor.BLUE    |
+| Magenta | Color.MAGENTA | BgColor.MAGENTA |
+| Cyan    | Color.CYAN    | BgColor.CYAN    |
+| White   | Color.WHITE   | BgColor.WHITE   |
 
 **Bright colors**
 
 | Color   | Foreground           | Background             |
 |---------|----------------------|------------------------|
 | Black   | Color.BRIGHT_BLACK   | BgColor.BRIGHT_BLACK   |
-| RED     | Color.BRIGHT_RED     | BgColor.BRIGHT_RED     |
-| GREEN   | Color.BRIGHT_GREEN   | BgColor.BRIGHT_GREEN   |
-| YELLOW  | Color.BRIGHT_YELLOW  | BgColor.BRIGHT_YELLOW  |
-| BLUE    | Color.BRIGHT_BLUE    | BgColor.BRIGHT_BLUE    |
-| MAGENTA | Color.BRIGHT_MAGENTA | BgColor.BRIGHT_MAGENTA |
-| CYAN    | Color.BRIGHT_CYAN    | BgColor.BRIGHT_CYAN    |
-| WHITE   | Color.BRIGHT_WHITE   | BgColor.BRIGHT_WHITE   |
+| Red     | Color.BRIGHT_RED     | BgColor.BRIGHT_RED     |
+| Green   | Color.BRIGHT_GREEN   | BgColor.BRIGHT_GREEN   |
+| Yellow  | Color.BRIGHT_YELLOW  | BgColor.BRIGHT_YELLOW  |
+| Blue    | Color.BRIGHT_BLUE    | BgColor.BRIGHT_BLUE    |
+| Magenta | Color.BRIGHT_MAGENTA | BgColor.BRIGHT_MAGENTA |
+| Cyan    | Color.BRIGHT_CYAN    | BgColor.BRIGHT_CYAN    |
+| White   | Color.BRIGHT_WHITE   | BgColor.BRIGHT_WHITE   |
 
 **Modifiers**
 
@@ -76,11 +76,98 @@ There are no built-in colors for the more than 16M of colors of the true color p
 ```python
 from simplecolors import TrueColor, BgTrueColor
 
+# Define colors either as hex strings (normal or short) or as rgb values
 BLUE = TrueColor('#1F2041')
 PURPLE = TrueColor('#437')
 GREEN = TrueColor(65, 123, 90)
-BG_COLOR = BgTrueColor(r=208, g=206, b=186)
+BG_COLOR = BgTrueColor(r=63, g=123, b=90)
 ```
 
+### Colorize text
 
-You will find more practical examples in the `examples` directoty.
+You can add color in two ways:
+
+- `colorize`: given a string it return a new string with the color escape sequences.
+- `cprint`: print applying colors to the printed text.
+
+`cprint` has the same signature as the built-in print function with an extra keyword argument `style` to define the style to apply.
+
+```python
+from simplecolors import Color, Mod, colorize, cprint
+
+colorize('Text with colors', Color.RED)
+
+cprint('Print with color', style=Mod.BOLD)
+```
+
+Both methods adds the reset modifier at the end automatically.
+
+In fact you can concatenate styles (all colors and modifiers are instances of the Style class) to any string directly. Just remember that in these cases it is necessary to put the reset modifier manually.
+
+```python
+print(Color.RED + 'Colored text' + Mod.RESET)
+print(Color.RED, 'Colored text', Mod.RESET, sep='')
+
+str1 = 'This is a {}blue{} text'.format(Color.BLUE, Mod.RESET)
+str2 = 'This is a %syellow%s text' % (Color.YELLOW + Mod.BOLD, Mod.RESET)
+str3 = f'{Color.RED}{Mod.BOLD}This is a text in bold red{Mod.RESET}'
+```
+
+### Mix styles together
+
+It is possible to combine styles using the addition operator.
+
+```python
+cprint('This is a warning', Color.RED + BgColor.YELLOW + Mod.BOLD + Mod.Italic)
+```
+
+If you plan to use the same combination frequently you can assign it to a variable:
+
+```python
+title_style = Color.BLUE + Mod.UNDERLINE
+cprint('Title 1', style=title_style)
+colorize('Another title', style=title_style)
+```
+
+### Configuration
+
+You can configure *simplecolors* to enable or disable the colored globally.
+
+If it is disabled all calls to `colorize` or `cprint` won't color the text.
+
+```python
+from simplecolors import configure_colors
+
+configure_colors(enable_colors=False)
+```
+
+You can also define a default style that will be added automatically in all calls to `colorize` or `cprint`
+
+```python
+from simplecolors import configure_colors, Mod
+
+# Put everything in bold
+configure_colors(default_style, Mod.BOLD)
+
+cprint('Just an example...', style=Color.GREEN)  # It will be printed in green and bold
+```
+
+### Colorizer class
+
+If you need to colorize several things in a different way use custom instances of the `Colorizer` class.
+
+```python
+from simplecolors import Colorizer, Mod
+
+colorizer1 = Colorizer(default_style=Mod.BOLD)
+colorizer2 = Colorizer(default_style=Mod.ITALIC)
+
+colorizer1.colorize('The colorizer1 instance always prints text in bold', style=Color.BLUE)
+colorizer2.colorize('While colorizer2 always prints in italic', style=Color.YELLOW)
+```
+
+As you can see the behaviour is the same as in the `colorize` and `cprint` functions. That is because *simplecolors* uses an instance of the `Colorizer` class internally and exports those methods. Combine custom instances with the internal instance as you will.
+
+### Examples
+
+You can find more practical examples in the `examples` directoty.

@@ -47,9 +47,9 @@ class Colorizer:
 
     def cprint(self, *args, **kwargs):
         """
-        Color print.
-        Print applying colors to the printed text using the same signature as the built-in print function with an extra
-        keyword argument to define the style to apply.
+        Color print. Print applying colors to the printed text.
+        This method has the same signature as the built-in print function with an extra keyword argument to define the style to
+        apply.
         If this Colorizer instance has been configured with default styles they will be applied too to the printed text.
 
         :param TextIO file: a file-like object (stream); defaults to the current sys.stdout
