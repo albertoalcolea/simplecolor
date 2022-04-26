@@ -32,8 +32,13 @@ class ColorizerTestCase(unittest.TestCase):
 
     def test_colorize_no_color(self):
         c = Colorizer()
-        with self.assertRaisesRegex(TypeError, 'Invalid style parameter. It must be a Style object'):
-            c.colorize('testing', None)
+        output = c.colorize('testing')
+        self.assertEqual(output, 'testing')
+
+    def test_colorize_no_color_and_default_style(self):
+        c = Colorizer(default_style=Color.GREEN)
+        output = c.colorize('testing')
+        self.assertEqual(output, '\033[32mtesting\033[0m')
 
     def test_colorize_invalid_color(self):
         c = Colorizer()
@@ -77,15 +82,30 @@ class ColorizerTestCase(unittest.TestCase):
     @patch('builtins.print')
     def test_cprint_no_color(self, mock_print):
         c = Colorizer()
-        with self.assertRaisesRegex(TypeError, 'Invalid style parameter. It must be a Style object'):
-            c.cprint('testing', style=None)
-        mock_print.assert_not_called()
+        c.cprint('testing')
+
+        calls = [
+            call('testing'),
+        ]
+        mock_print.assert_has_calls(calls)
+
+    @patch('builtins.print')
+    def test_cprint_no_color_and_default_style(self, mock_print):
+        c = Colorizer(default_style=Color.GREEN)
+        c.cprint('testing')
+
+        calls = [
+            call(Color.GREEN, sep='', end='', file=None, flush=False),
+            call('testing', end='', file=None, flush=False),
+            call(Mod.RESET, sep='', end=None, file=None, flush=None),
+        ]
+        mock_print.assert_has_calls(calls)
 
     @patch('builtins.print')
     def test_cprint_invalid_color(self, mock_print):
         c = Colorizer()
         with self.assertRaisesRegex(TypeError, 'Invalid style parameter. It must be a Style object'):
-            c.cprint('testing', style=None)
+            c.cprint('testing', style=123)
         mock_print.assert_not_called()
 
     @patch('builtins.print')

@@ -96,7 +96,6 @@ You can add color in two ways:
 from simplecolors import Color, Mod, colorize, cprint
 
 colorize('Text with colors', Color.RED)
-
 cprint('Print with color', style=Mod.BOLD)
 ```
 
@@ -150,6 +149,7 @@ from simplecolors import configure_colors, Mod
 configure_colors(default_style, Mod.BOLD)
 
 cprint('Just an example...', style=Color.GREEN)  # It will be printed in green and bold
+cprint('Only bold')
 ```
 
 ### Colorizer class
@@ -167,6 +167,15 @@ colorizer2.colorize('While colorizer2 always prints in italic', style=Color.YELL
 ```
 
 As you can see the behaviour is the same as in the `colorize` and `cprint` functions. That is because *simplecolors* uses an instance of the `Colorizer` class internally and exports those methods. Combine custom instances with the internal instance as you will.
+
+If you want to use some default style only in a certain piece of code you can use `Colorizer` as a context manager:
+
+```python
+from simplecolors import Colorizer
+
+with Colorizer(default_style=Color.GREEN) as c:
+    c.cprint('Inside the context manager')
+```
 
 ### Examples
 

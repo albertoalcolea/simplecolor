@@ -28,7 +28,7 @@ class Colorizer:
                 raise TypeError('Invalid default_style parameter. It must be a Style object')
             self._default_style = default_style
 
-    def colorize(self, text, style):
+    def colorize(self, text, style=None):
         """
         Colorize the given text with the given style.
         If this Colorizer instance has been configured with default styles they will be applied too to the text.
@@ -39,17 +39,20 @@ class Colorizer:
         if not self._enable_colors:
             return text
 
-        if not isinstance(style, Style):
+        if style is not None and not isinstance(style, Style):
             raise TypeError('Invalid style parameter. It must be a Style object')
 
         style = self._combine_with_default_style(style)
+        if style is None:
+            return text
+
         return style + text + Mod.RESET
 
     def cprint(self, *args, **kwargs):
         """
         Color print. Print applying colors to the printed text.
-        This method has the same signature as the built-in print function with an extra keyword argument to define the style to
-        apply.
+        This method has the same signature as the built-in print function with an extra keyword argument to define the
+        style to apply.
         If this Colorizer instance has been configured with default styles they will be applied too to the printed text.
 
         :param TextIO file: a file-like object (stream); defaults to the current sys.stdout
@@ -68,25 +71,34 @@ class Colorizer:
     def _cprint(self, *args, **kwargs):
         style = kwargs.pop('style', None)
 
-        if not isinstance(style, Style):
+        if style is not None and not isinstance(style, Style):
             raise TypeError('Invalid style parameter. It must be a Style object')
-
-        end = kwargs.pop('end', None)
-        file = kwargs.pop('file', None)
-        flush = kwargs.pop('flush', None)
 
         style = self._combine_with_default_style(style)
 
-        # Do not apply the optional end string and do not flush until writing the reset character
-        print(style, sep='', end='', file=file, flush=False)
-        print(*args, **kwargs, end='', file=file, flush=False)
-        print(Mod.RESET, sep='', end=end, file=file, flush=flush)
+        if style is None:
+            print(*args, *kwargs)
+        else:
+            end = kwargs.pop('end', None)
+            file = kwargs.pop('file', None)
+            flush = kwargs.pop('flush', None)
+
+            # Do not put the optional end string and do not flush until writing the reset character
+            print(style, sep='', end='', file=file, flush=False)
+            print(*args, **kwargs, end='', file=file, flush=False)
+            print(Mod.RESET, sep='', end=end, file=file, flush=flush)
 
     def _combine_with_default_style(self, style):
-        if self._default_style is not None:
+        if style is not None and self._default_style is not None:
             return style + self._default_style
         else:
-            return style
+            return style or self._default_style
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        pass  # Do nothing
 
 
 root = Colorizer()
