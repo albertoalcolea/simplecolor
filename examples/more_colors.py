@@ -1,4 +1,4 @@
-from simplecolors import Color256, BgColor256, BgColor, TrueColor, BgTrueColor, Mod, cprint
+from tcolors import Color256, BgColor256, BgColor, TrueColor, BgTrueColor, Mod, cprint
 
 
 def color256():

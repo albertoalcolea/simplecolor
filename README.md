@@ -1,4 +1,4 @@
-# simplecolors
+# tcolors
 
 Simple and easily-disableable dependency-free library for simplifying your life when working with ANSI colors in the terminal.
 
@@ -18,7 +18,7 @@ This is especially useful when developing command line applications whose output
 
 ### Colors
 
-*simplecolors* can color text with different color palettes. Take into account that not all terminal emulators support all of them.
+*tcolors* can color text with different color palettes. Take into account that not all terminal emulators support all of them.
 
 **Basic 3-bit colors**
 
@@ -74,7 +74,7 @@ Where `{N}` can be any number from 0 to 255.
 There are no built-in colors for the more than 16M of colors of the true color palette, but you can create your own colors just by creating a new instance of `TrueColor` or `BgTrueColor`
 
 ```python
-from simplecolors import TrueColor, BgTrueColor
+from tcolors import TrueColor, BgTrueColor
 
 # Define colors either as hex strings (normal or short) or as rgb values
 BLUE = TrueColor('#1F2041')
@@ -93,7 +93,7 @@ You can add color in two ways:
 `cprint` has the same signature as the built-in print function with an extra keyword argument `style` to define the style to apply.
 
 ```python
-from simplecolors import Color, Mod, colorize, cprint
+from tcolors import Color, Mod, colorize, cprint
 
 colorize('Text with colors', Color.RED)
 cprint('Print with color', style=Mod.BOLD)
@@ -130,12 +130,12 @@ colorize('Another title', style=title_style)
 
 ### Configuration
 
-You can configure *simplecolors* to enable or disable the colored globally.
+You can configure *tcolors* to enable or disable the colored globally.
 
 If it is disabled all calls to `colorize` or `cprint` won't color the text.
 
 ```python
-from simplecolors import configure_colors
+from tcolors import configure_colors
 
 configure_colors(enable_colors=False)
 ```
@@ -143,7 +143,7 @@ configure_colors(enable_colors=False)
 You can also define a default style that will be added automatically in all calls to `colorize` or `cprint`
 
 ```python
-from simplecolors import configure_colors, Mod
+from tcolors import configure_colors, Mod
 
 # Put everything in bold
 configure_colors(default_style, Mod.BOLD)
@@ -157,7 +157,7 @@ cprint('Only bold')
 If you need to colorize several things in a different way use custom instances of the `Colorizer` class.
 
 ```python
-from simplecolors import Colorizer, Mod
+from tcolors import Colorizer, Mod
 
 colorizer1 = Colorizer(default_style=Mod.BOLD)
 colorizer2 = Colorizer(default_style=Mod.ITALIC)
@@ -166,12 +166,12 @@ colorizer1.colorize('The colorizer1 instance always prints text in bold', style=
 colorizer2.colorize('While colorizer2 always prints in italic', style=Color.YELLOW)
 ```
 
-As you can see the behaviour is the same as in the `colorize` and `cprint` functions. That is because *simplecolors* uses an instance of the `Colorizer` class internally and exports those methods. Combine custom instances with the internal instance as you will.
+As you can see the behaviour is the same as in the `colorize` and `cprint` functions. That is because *tcolors* uses an instance of the `Colorizer` class internally and exports those methods. Combine custom instances with the internal instance as you will.
 
 If you want to use some default style only in a certain piece of code you can use `Colorizer` as a context manager:
 
 ```python
-from simplecolors import Colorizer
+from tcolors import Colorizer
 
 with Colorizer(default_style=Color.GREEN) as c:
     c.cprint('Inside the context manager')

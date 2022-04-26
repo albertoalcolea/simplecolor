@@ -3,7 +3,7 @@ import re
 from setuptools import setup
 
 
-PACKAGE_NAME = 'simplecolors'
+PACKAGE_NAME = 'tcolors'
 
 
 def read_file(path):
@@ -12,7 +12,7 @@ def read_file(path):
 
 
 def get_version():
-    content = read_file('simplecolors/__init__.py')
+    content = read_file('tcolors/__init__.py')
     regex = r'^__version__ = [\'"]([^\'"]+)[\'"]'
     match = re.search(regex, content, re.MULTILINE)
     if match:
@@ -28,14 +28,14 @@ setup(
     long_description_content_type='text/markdown',
     author='Alberto Alcolea',
     author_email='albertoalcolea@gmail.com',
-    url='https://github.com/albertoalcolea/simplecolors',
+    url='https://github.com/albertoalcolea/tcolors',
     project_urls={
-        'Source': 'https://github.com/albertoalcolea/simplecolors'
+        'Source': 'https://github.com/albertoalcolea/tcolors'
     },
     license='MIT',
     keywords=[
-        'simplecolors',
-        'simplecolor',
+        'tcolors',
+        'tcolor',
         'term',
         'terminal',
         'CLI',

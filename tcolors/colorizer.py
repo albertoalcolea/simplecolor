@@ -1,4 +1,4 @@
-from simplecolors.styles import Style, Mod
+from tcolors.styles import Style, Mod
 
 
 class Colorizer:

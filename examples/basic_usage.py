@@ -1,8 +1,8 @@
 import sys
 
-from simplecolors import Color, BgColor, Mod
-from simplecolors import colorize, cprint, configure_colors
-from simplecolors import Colorizer
+from tcolors import Color, BgColor, Mod
+from tcolors import colorize, cprint, configure_colors
+from tcolors import Colorizer
 
 
 def direct_use():
@@ -86,7 +86,7 @@ def configuration():
 
 def custom_instance():
     # If you need to colorize several things in a different way you can use custom instances of the Colorizer class
-    # that simplecolors uses internally.
+    # that tcolors uses internally.
     colorizer1 = Colorizer(default_style=Mod.BOLD)
     colorizer2 = Colorizer(default_style=Mod.ITALIC)
 

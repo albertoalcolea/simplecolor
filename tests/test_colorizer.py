@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, call
 
-from simplecolors import Color, Mod, Colorizer, configure_colors, colorize, cprint
+from tcolors import Color, Mod, Colorizer, configure_colors, colorize, cprint
 
 
 class ColorizerTestCase(unittest.TestCase):

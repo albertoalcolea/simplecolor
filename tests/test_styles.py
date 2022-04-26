@@ -1,6 +1,6 @@
 import unittest
 
-from simplecolors import Style, Color, BgColor, Mod, Color256, BgColor256, TrueColor, BgTrueColor
+from tcolors import Style, Color, BgColor, Mod, Color256, BgColor256, TrueColor, BgTrueColor
 
 
 class StyleTestCase(unittest.TestCase):

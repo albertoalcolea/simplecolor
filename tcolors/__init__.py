@@ -1,5 +1,5 @@
-from simplecolors.styles import Style, Color, BgColor, Mod, Color256, BgColor256, TrueColor, BgTrueColor
-from simplecolors.colorizer import Colorizer, configure_colors, colorize, cprint
+from tcolors.styles import Style, Color, BgColor, Mod, Color256, BgColor256, TrueColor, BgTrueColor
+from tcolors.colorizer import Colorizer, configure_colors, colorize, cprint
 
 
 __version__ = '0.0.1'

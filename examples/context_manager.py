@@ -1,4 +1,4 @@
-from simplecolors import Color, Mod, Colorizer, configure_colors, cprint, colorize
+from tcolors import Color, Mod, Colorizer, configure_colors, cprint, colorize
 
 
 def with_context_manager():
@@ -12,7 +12,7 @@ def with_context_manager():
     print()
 
     # If you want to use multiple default combinations you can create more instances of the Colorizer class, which
-    # simplecolors uses internally to color text with the cprint and colorize functions:
+    # tcolors uses internally to color text with the cprint and colorize functions:
     colorizer2 = Colorizer(default_style=Color.GREEN)
     colorizer2.cprint('The instance colorizer2 always uses green')
     cprint('But the internal instance still use yellow and bold')
