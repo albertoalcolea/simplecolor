@@ -117,7 +117,7 @@ str3 = f'{Color.RED}{Mod.BOLD}This is a text in bold red{Mod.RESET}'
 It is possible to combine styles using the addition operator.
 
 ```python
-cprint('This is a warning', Color.RED + BgColor.YELLOW + Mod.BOLD + Mod.Italic)
+cprint('This is a warning', style=Color.RED + BgColor.YELLOW + Mod.BOLD + Mod.Italic)
 ```
 
 If you plan to use the same combination frequently you can assign it to a variable:
