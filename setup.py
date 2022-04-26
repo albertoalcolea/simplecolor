@@ -50,9 +50,6 @@ setup(
         'ANSI colours',
     ],
     packages=[PACKAGE_NAME],
-    package_data={
-        PACKAGE_NAME: ['py.typed'],
-    },
     extras_require={
         'dev': [
             'flake8>=4.0.1',
