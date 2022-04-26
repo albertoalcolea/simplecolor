@@ -1,10 +1,9 @@
 # simplecolors
 
-Yet another Python library for simplifying your life when working with ANSI colors in the terminal.
+Simple and easily-disableable dependency-free library for simplifying your life when working with ANSI colors in the terminal.
+Without dozens of options, methods and combinations. Coloring the terminal should be a simple task.
 
-Simple and easily disableable, without dozens of options, methods and combinations. Coloring the terminal should be a simple task.
-
-Supports basic colors, bright colors, 256 ANSI colors, true colors and most of the text modifiers.
+Supports basic colors, bright colors, 256 ANSI colors, true colors and most of the ANSI text modifiers.
 
 ## Motivation
 

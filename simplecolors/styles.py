@@ -13,6 +13,18 @@ HEX_COLOR_PATTERN = re.compile(r'^#?(?:([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA
 
 
 class Style:
+    """
+    Main class to store the codes that will be formated to ANSI escape sequences when coloring.
+    It supports addition with other Style instances, creating a new combined style, and with strings, creating a new
+    string with the formatted escape sequence.
+
+    It uses an ordered set (implemented with a dict with None values) to store internally the list of codes in order of
+    insertion, so the last added colors take preference.
+    Dicts remember the order of insertion since CPython 3.6 and since Python 3.7 as a language feature.
+
+    The codes are the numeric parts (as strings) of the escape sequences excluding the CSI and the final m character.
+    Eg: ESC[1;38;5;75m -> {'1': None, '38;5;75': None}
+    """
 
     def __init__(self, styles):
         if isinstance(styles, str):
