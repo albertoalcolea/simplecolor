@@ -101,16 +101,10 @@ class Colorizer:
         pass  # Do nothing
 
 
-root = Colorizer()
+_root = Colorizer()
 
 
-def configure_colors(*args, **kwargs):
-    root.configure(*args, **kwargs)
-
-
-def colorize(*args, **kwargs):
-    return root.colorize(*args, **kwargs)
-
-
-def cprint(*args, **kwargs):
-    return root.cprint(*args, **kwargs)
+# Exported shortcuts
+configure_colors = _root.configure
+colorize = _root.colorize
+cprint = _root.cprint
