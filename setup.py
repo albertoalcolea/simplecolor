@@ -53,7 +53,8 @@ setup(
     extras_require={
         'dev': [
             'flake8>=4.0.1',
-            'tox>=3.25.0'
+            'tox>=3.25.0',
+            'twine>=4.0.0',
         ]
     },
     python_requires='>=3.6',
