@@ -6,6 +6,14 @@ Without dozens of options, methods and combinations. Coloring the terminal shoul
 
 Supports basic colors, bright colors, 256 ANSI colors, true colors and most of the ANSI text modifiers.
 
+## Installation
+
+Install *tcolors* by using pip:
+
+```
+$ pip install tcolors
+```
+
 ## Motivation
 
 There are dozens, if not hundreds, of libraries that color the terminal with ANSI escape sequences, why develop another one?
