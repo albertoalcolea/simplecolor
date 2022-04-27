@@ -1,5 +1,6 @@
 # tcolors
 
+[![Build Status](https://github.com/albertoalcolea/tcolors/workflows/Tests/badge.svg)](https://github.com/albertoalcolea/tcolors/actions?query=workflow%3ATests)
 [![Latest PyPI Version](https://img.shields.io/pypi/v/tcolors.svg)](https://pypi.python.org/pypi/tcolors)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/tcolors.svg)](https://pypi.python.org/pypi/tcolors)
 
