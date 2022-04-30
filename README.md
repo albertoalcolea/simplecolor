@@ -4,7 +4,7 @@
 [![Latest PyPI Version](https://img.shields.io/pypi/v/tcolors.svg)](https://pypi.python.org/pypi/tcolors)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/tcolors.svg)](https://pypi.python.org/pypi/tcolors)
 
-Simple and easily-disableable dependency-free library for simplifying your life when working with ANSI colors in the terminal.
+Simple and easily-disableable library to make your life easier when working with ANSI colors in the terminal.
 
 Without dozens of options, methods and combinations. Coloring the terminal should be a simple task.
 
