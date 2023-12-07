@@ -2,7 +2,7 @@ from tcolors.styles import Style, Color, BgColor, Mod, Color256, BgColor256, Tru
 from tcolors.colorizer import Colorizer, configure_colors, colorize, cprint
 
 
-__version__ = '0.0.1'
+__version__ = '0.1.0'
 
 __all__ = [
     'Style', 'Color', 'BgColor', 'Mod', 'Color256', 'BgColor256', 'TrueColor', 'BgTrueColor',
